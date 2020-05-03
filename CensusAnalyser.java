@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.util.Iterator;
 
@@ -22,13 +23,13 @@ public class CensusAnalyser {
                     .withType(CSVStateCensus.class)
                     .withIgnoreLeadingWhiteSpace(true)
                     .build();
-            Iterator<CSVStateCensus> csvUseraIterator=csvToBean.iterator();
-            while(csvUseraIterator.hasNext()){
+            Iterator<CSVStateCensus> csvUserIterator=csvToBean.iterator();
+            while(csvUserIterator.hasNext()){
                 count++;
-                CSVStateCensus csvUser = csvUseraIterator.next();
+                CSVStateCensus csvUser = csvUserIterator.next();
             }
-        } catch (IOException exception ) {
-                throw new CensusAnalyserException("Census File Problem", CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
+        } catch(IOException exception){
+                throw new CensusAnalyserException("File Not Found", CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
         }
         return count;
     }

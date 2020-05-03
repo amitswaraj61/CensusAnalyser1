@@ -9,6 +9,7 @@ import static org.junit.Assert.*;
 public class CensusAnalyserTest {
     private static  final String INDIA_CENSUS_CSV_FILE_PATH ="C:\\Users\\Kis\\Desktop\\StateCensusData.csv";
     private static final String INDIA_CENSUS_CSV_WRONG_FILE_PATH="C:\\Users\\Kis\\StateCensusData.csv";
+    private static final String INDIA_CENSUS_CSV_WRONG_TYPE="C:\\Users\\Kis\\Desktop\\StateCensusData.cs";
 
     @Test
     public void givenStateCensusCSVFile_countTotalRecord_shouldReturnTotalRecord()  {
@@ -22,13 +23,23 @@ public class CensusAnalyserTest {
         }
     }
     @Test
-    public void givenStateCensusCsvFile_whenwrongFileName_shouldReturnFileErrorCustomException(){
+    public void givenStateCensusCsvFile_whenWrongFileName_shouldReturnFileNotFoundCustomException(){
         CensusAnalyser censusAnalyser=new CensusAnalyser();
         try{
             censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_WRONG_FILE_PATH);
         }
         catch(CensusAnalyserException exception){
-            assertEquals("Census File Problem", exception.getMessage());
+            assertEquals("File Not Found", exception.getMessage());
+        }
+    }
+    @Test
+    public void givenIndianCensusCsvFile_whenWrongFileType_shouldReturnFileNotFoundCustomException(){
+        CensusAnalyser censusAnalyser=new CensusAnalyser();
+        try{
+            censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_WRONG_TYPE);
+        }
+        catch(CensusAnalyserException exception){
+            assertEquals("File Not Found", exception.getMessage());
         }
     }
 }
