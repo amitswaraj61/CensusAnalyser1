@@ -16,22 +16,27 @@ import java.util.Iterator;
 public class CensusAnalyser {
     private int count;
 
-    public int loadIndiaCensusData(String csvFilePath) throws CensusAnalyserException{
+    public int loadIndiaCensusData(String csvFilePath) throws CensusAnalyserException {
         try {
             Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));
-            CsvToBean<CSVStateCensus> csvToBean=new CsvToBeanBuilder(reader)
+            CsvToBean<CSVStateCensus> csvToBean = new CsvToBeanBuilder(reader)
                     .withType(CSVStateCensus.class)
                     .withIgnoreLeadingWhiteSpace(true)
                     .build();
-            Iterator<CSVStateCensus> csvUserIterator=csvToBean.iterator();
-            while(csvUserIterator.hasNext()){
+            Iterator<CSVStateCensus> csvUserIterator = csvToBean.iterator();
+            while (csvUserIterator.hasNext()) {
                 count++;
                 CSVStateCensus csvUser = csvUserIterator.next();
             }
-        } catch(IOException exception){
-                throw new CensusAnalyserException("File Not Found", CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
+        } catch (NoSuchFileException exception) {
+            throw new CensusAnalyserException("File Not Found", CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
+        } catch (RuntimeException exception) {
+            throw new CensusAnalyserException("File Delimiter Incorrect Or Header Incorrect", CensusAnalyserException.ExceptionType.DELIMETER_PROBLEM);
+        }catch (IOException exception){
+            exception.printStackTrace();
         }
         return count;
+
     }
 }
 
