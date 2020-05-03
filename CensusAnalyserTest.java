@@ -32,7 +32,7 @@ public class CensusAnalyserTest {
         }
     }
     @Test
-    public void givenIndianCensusCsvFile_whenWrongFileType_shouldReturnFileNotFoundCustomException(){
+    public void givenStateCensusCsvFile_whenWrongFileType_shouldReturnFileNotFoundCustomException(){
         CensusAnalyser censusAnalyser=new CensusAnalyser();
         try{
             censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_WRONG_TYPE);
@@ -42,7 +42,17 @@ public class CensusAnalyserTest {
         }
     }
     @Test
-    public void givenIndianCensusCsvFile_whenDelimiterIncorrect_shouldReturnFileNotFoundCustomException(){
+    public void givenStateCensusCsvFile_whenDelimiterIncorrect_shouldReturnDelimiterIncorrectCustomException(){
+        CensusAnalyser censusAnalyser=new CensusAnalyser();
+        try{
+            censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_DELIMETER_WRONG);
+        }
+        catch(CensusAnalyserException exception){
+            assertEquals("File Delimiter Incorrect Or Header Incorrect", exception.getMessage());
+        }
+    }
+    @Test
+    public void givenStateCensusCsvFile_whenHeaderIncorrect_shouldReturnHeaderIncorrectCustomException(){
         CensusAnalyser censusAnalyser=new CensusAnalyser();
         try{
             censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_DELIMETER_WRONG);
