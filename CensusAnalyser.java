@@ -38,6 +38,24 @@ public class CensusAnalyser {
         return count;
 
     }
+
+    public int loadStateCodeData(String csvFilePath) throws CensusAnalyserException {
+        try {
+            Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));
+            CsvToBean<CSVStateCode> csvToBean = new CsvToBeanBuilder(reader)
+                    .withType(CSVStateCode.class)
+                    .withIgnoreLeadingWhiteSpace(true)
+                    .build();
+            Iterator<CSVStateCode> csvUserIterator = csvToBean.iterator();
+            while (csvUserIterator.hasNext()) {
+                count++;
+                CSVStateCode csvUser = csvUserIterator.next();
+            }
+        } catch (IOException exception){
+            exception.printStackTrace();
+        }
+        return count;
+    }
 }
 
 

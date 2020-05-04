@@ -9,7 +9,9 @@ public class CensusAnalyserTest {
     private static  final String INDIA_CENSUS_CSV_FILE_PATH ="C:\\Users\\Kis\\Desktop\\StateCensusData.csv";
     private static final String INDIA_CENSUS_CSV_WRONG_FILE_PATH="C:\\Users\\Kis\\StateCensusData.csv";
     private static final String INDIA_CENSUS_CSV_WRONG_TYPE="C:\\Users\\Kis\\Desktop\\StateCensusData.cs";
-    private static final String INDIA_CENSUS_CSV_DELIMETER_WRONG="E:\\StateCensusData.csv";
+    private static final String INDIA_CENSUS_CSV_DELIMITER_HEADER_WRONG="E:\\StateCensusData.csv";
+    private static  final String STATE_CODE_CSV_FILE_PATH ="C:\\Users\\Kis\\Desktop\\StateCode.csv";
+
     @Test
     public void givenStateCensusCSVFile_countTotalRecord_shouldReturnTotalRecord()  {
         CensusAnalyser censusAnalyser = new CensusAnalyser();
@@ -45,7 +47,7 @@ public class CensusAnalyserTest {
     public void givenStateCensusCsvFile_whenDelimiterIncorrect_shouldReturnDelimiterIncorrectCustomException(){
         CensusAnalyser censusAnalyser=new CensusAnalyser();
         try{
-            censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_DELIMETER_WRONG);
+            censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_DELIMITER_HEADER_WRONG);
         }
         catch(CensusAnalyserException exception){
             assertEquals("File Delimiter Incorrect Or Header Incorrect", exception.getMessage());
@@ -55,10 +57,21 @@ public class CensusAnalyserTest {
     public void givenStateCensusCsvFile_whenHeaderIncorrect_shouldReturnHeaderIncorrectCustomException(){
         CensusAnalyser censusAnalyser=new CensusAnalyser();
         try{
-            censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_DELIMETER_WRONG);
+            censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_DELIMITER_HEADER_WRONG);
         }
         catch(CensusAnalyserException exception){
             assertEquals("File Delimiter Incorrect Or Header Incorrect", exception.getMessage());
+        }
+    }
+    @Test
+    public void givenStateCodeCsvFile__countTotalRecord_shouldReturnTotalRecord(){
+        CensusAnalyser censusAnalyser=new CensusAnalyser();
+        int numOfRecords;
+        try{
+            numOfRecords = censusAnalyser.loadStateCodeData(STATE_CODE_CSV_FILE_PATH);
+            assertEquals(37, numOfRecords);
+        } catch (CensusAnalyserException exception) {
+            exception.printStackTrace();
         }
     }
 }
