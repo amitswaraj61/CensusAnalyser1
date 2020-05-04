@@ -107,4 +107,14 @@ public class CensusAnalyserTest {
             assertEquals("File Delimiter Incorrect Or Header Incorrect", exception.getMessage());
         }
     }
+
+    @Test
+    public void givenStateCodeCsvFile_whenHeaderIncorrect_shouldReturnHeaderIncorrectCustomException() {
+        CensusAnalyser censusAnalyser = new CensusAnalyser();
+        try {
+            censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_DELIMITER_HEADER_WRONG);
+        } catch (CensusAnalyserException exception) {
+            assertEquals("File Delimiter Incorrect Or Header Incorrect", exception.getMessage());
+        }
+    }
 }
