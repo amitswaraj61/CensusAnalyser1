@@ -51,7 +51,10 @@ public class CensusAnalyser {
                 count++;
                 CSVStateCode csvUser = csvUserIterator.next();
             }
-        } catch (IOException exception){
+        } catch(NoSuchFileException exception){
+            throw new CensusAnalyserException("File Not Found", CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
+        }
+        catch (IOException exception){
             exception.printStackTrace();
         }
         return count;

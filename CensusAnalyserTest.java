@@ -6,14 +6,14 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 public class CensusAnalyserTest {
-    private static  final String INDIA_CENSUS_CSV_FILE_PATH ="C:\\Users\\Kis\\Desktop\\StateCensusData.csv";
-    private static final String INDIA_CENSUS_CSV_WRONG_FILE_PATH="C:\\Users\\Kis\\StateCensusData.csv";
-    private static final String INDIA_CENSUS_CSV_WRONG_TYPE="C:\\Users\\Kis\\Desktop\\StateCensusData.cs";
-    private static final String INDIA_CENSUS_CSV_DELIMITER_HEADER_WRONG="E:\\StateCensusData.csv";
-    private static  final String STATE_CODE_CSV_FILE_PATH ="C:\\Users\\Kis\\Desktop\\StateCode.csv";
+    private static final String INDIA_CENSUS_CSV_FILE_PATH = "C:\\Users\\Kis\\Desktop\\StateCensusData.csv";
+    private static final String INDIA_CENSUS_CSV_WRONG_FILE_PATH = "C:\\Users\\Kis\\StateCensusData.csv";
+    private static final String INDIA_CENSUS_CSV_WRONG_TYPE = "C:\\Users\\Kis\\Desktop\\StateCensusData.cs";
+    private static final String INDIA_CENSUS_CSV_DELIMITER_HEADER_WRONG = "E:\\StateCensusData.csv";
+    private static final String STATE_CODE_CSV_FILE_PATH = "C:\\Users\\Kis\\Desktop\\StateCode.csv";
 
     @Test
-    public void givenStateCensusCSVFile_countTotalRecord_shouldReturnTotalRecord()  {
+    public void givenStateCensusCSVFile_countTotalRecord_shouldReturnTotalRecord() {
         CensusAnalyser censusAnalyser = new CensusAnalyser();
         int numOfRecords = 0;
         try {
@@ -23,55 +23,66 @@ public class CensusAnalyserTest {
             exception.printStackTrace();
         }
     }
+
     @Test
-    public void givenStateCensusCsvFile_whenWrongFileName_shouldReturnFileNotFoundCustomException(){
-        CensusAnalyser censusAnalyser=new CensusAnalyser();
-        try{
+    public void givenStateCensusCsvFile_whenWrongFileName_shouldReturnFileNotFoundCustomException() {
+        CensusAnalyser censusAnalyser = new CensusAnalyser();
+        try {
             censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_WRONG_FILE_PATH);
-        }
-        catch(CensusAnalyserException exception){
+        } catch (CensusAnalyserException exception) {
             assertEquals("File Not Found", exception.getMessage());
         }
     }
+
     @Test
-    public void givenStateCensusCsvFile_whenWrongFileType_shouldReturnFileNotFoundCustomException(){
-        CensusAnalyser censusAnalyser=new CensusAnalyser();
-        try{
+    public void givenStateCensusCsvFile_whenWrongFileType_shouldReturnFileNotFoundCustomException() {
+        CensusAnalyser censusAnalyser = new CensusAnalyser();
+        try {
             censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_WRONG_TYPE);
-        }
-        catch(CensusAnalyserException exception){
+        } catch (CensusAnalyserException exception) {
             assertEquals("File Not Found", exception.getMessage());
         }
     }
+
     @Test
-    public void givenStateCensusCsvFile_whenDelimiterIncorrect_shouldReturnDelimiterIncorrectCustomException(){
-        CensusAnalyser censusAnalyser=new CensusAnalyser();
-        try{
+    public void givenStateCensusCsvFile_whenDelimiterIncorrect_shouldReturnDelimiterIncorrectCustomException() {
+        CensusAnalyser censusAnalyser = new CensusAnalyser();
+        try {
             censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_DELIMITER_HEADER_WRONG);
-        }
-        catch(CensusAnalyserException exception){
+        } catch (CensusAnalyserException exception) {
             assertEquals("File Delimiter Incorrect Or Header Incorrect", exception.getMessage());
         }
     }
+
     @Test
-    public void givenStateCensusCsvFile_whenHeaderIncorrect_shouldReturnHeaderIncorrectCustomException(){
-        CensusAnalyser censusAnalyser=new CensusAnalyser();
-        try{
+    public void givenStateCensusCsvFile_whenHeaderIncorrect_shouldReturnHeaderIncorrectCustomException() {
+        CensusAnalyser censusAnalyser = new CensusAnalyser();
+        try {
             censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_DELIMITER_HEADER_WRONG);
-        }
-        catch(CensusAnalyserException exception){
+        } catch (CensusAnalyserException exception) {
             assertEquals("File Delimiter Incorrect Or Header Incorrect", exception.getMessage());
         }
     }
+
     @Test
-    public void givenStateCodeCsvFile__countTotalRecord_shouldReturnTotalRecord(){
-        CensusAnalyser censusAnalyser=new CensusAnalyser();
+    public void givenStateCodeCsvFile__countTotalRecord_shouldReturnTotalRecord() {
+        CensusAnalyser censusAnalyser = new CensusAnalyser();
         int numOfRecords;
-        try{
+        try {
             numOfRecords = censusAnalyser.loadStateCodeData(STATE_CODE_CSV_FILE_PATH);
             assertEquals(37, numOfRecords);
         } catch (CensusAnalyserException exception) {
             exception.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenStateCodeCsvFile_whenWrongFileName_shouldReturnFileNotFoundCustomException() {
+        CensusAnalyser censusAnalyser = new CensusAnalyser();
+        try {
+            censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_WRONG_FILE_PATH);
+        } catch (CensusAnalyserException exception) {
+            assertEquals("File Not Found", exception.getMessage());
         }
     }
 }
