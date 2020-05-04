@@ -53,6 +53,8 @@ public class CensusAnalyser {
             }
         } catch(NoSuchFileException exception){
             throw new CensusAnalyserException("File Not Found", CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
+        }catch (RuntimeException exception){
+            throw new CensusAnalyserException("File Delimiter Incorrect Or Header Incorrect", CensusAnalyserException.ExceptionType.DELIMETER_PROBLEM);
         }
         catch (IOException exception){
             exception.printStackTrace();

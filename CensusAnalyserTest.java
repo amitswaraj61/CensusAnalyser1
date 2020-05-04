@@ -12,6 +12,7 @@ public class CensusAnalyserTest {
     private static final String INDIA_CENSUS_CSV_DELIMITER_HEADER_WRONG = "E:\\StateCensusData.csv";
     private static final String STATE_CODE_CSV_FILE_PATH = "C:\\Users\\Kis\\Desktop\\StateCode.csv";
     private static final String INDIA_CODE_CSV_WRONG_TYPE = "C:\\Users\\Kis\\Desktop\\StateCode.cs";
+    private static final String INDIA_STATE_CODE_DELIMITER_HEADER_WRONG = "E:\\StateCode.csv";
 
     @Test
     public void givenStateCensusCSVFile_countTotalRecord_shouldReturnTotalRecord() {
@@ -94,6 +95,16 @@ public class CensusAnalyserTest {
             censusAnalyser.loadIndiaCensusData(INDIA_CODE_CSV_WRONG_TYPE);
         } catch (CensusAnalyserException exception) {
             assertEquals("File Not Found", exception.getMessage());
+        }
+    }
+
+    @Test
+    public void givenStateCodeCsvFile_whenDelimiterIncorrect_shouldReturnDelimiterIncorrectCustomException() {
+        CensusAnalyser censusAnalyser = new CensusAnalyser();
+        try {
+            censusAnalyser.loadIndiaCensusData(INDIA_STATE_CODE_DELIMITER_HEADER_WRONG);
+        } catch (CensusAnalyserException exception) {
+            assertEquals("File Delimiter Incorrect Or Header Incorrect", exception.getMessage());
         }
     }
 }
