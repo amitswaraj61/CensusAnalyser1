@@ -11,6 +11,7 @@ public class CensusAnalyserTest {
     private static final String INDIA_CENSUS_CSV_WRONG_TYPE = "C:\\Users\\Kis\\Desktop\\StateCensusData.cs";
     private static final String INDIA_CENSUS_CSV_DELIMITER_HEADER_WRONG = "E:\\StateCensusData.csv";
     private static final String STATE_CODE_CSV_FILE_PATH = "C:\\Users\\Kis\\Desktop\\StateCode.csv";
+    private static final String INDIA_CODE_CSV_WRONG_TYPE = "C:\\Users\\Kis\\Desktop\\StateCode.cs";
 
     @Test
     public void givenStateCensusCSVFile_countTotalRecord_shouldReturnTotalRecord() {
@@ -81,6 +82,16 @@ public class CensusAnalyserTest {
         CensusAnalyser censusAnalyser = new CensusAnalyser();
         try {
             censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_WRONG_FILE_PATH);
+        } catch (CensusAnalyserException exception) {
+            assertEquals("File Not Found", exception.getMessage());
+        }
+    }
+
+    @Test
+    public void givenStateCodeCsvFile_whenWrongFileType_shouldReturnFileNotFoundCustomException() {
+        CensusAnalyser censusAnalyser = new CensusAnalyser();
+        try {
+            censusAnalyser.loadIndiaCensusData(INDIA_CODE_CSV_WRONG_TYPE);
         } catch (CensusAnalyserException exception) {
             assertEquals("File Not Found", exception.getMessage());
         }
