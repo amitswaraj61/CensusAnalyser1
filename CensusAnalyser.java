@@ -3,9 +3,6 @@ package stateProblem;
 import com.opencsv.CSVReader;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
-
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
@@ -19,18 +16,15 @@ public class CensusAnalyser {
     public int loadIndiaCensusData(String csvFilePath) throws CensusAnalyserException {
         try {
             Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));
-            CsvToBean<CSVStateCensus> csvToBean = new CsvToBeanBuilder(reader)
-                    .withType(CSVStateCensus.class)
-                    .withIgnoreLeadingWhiteSpace(true)
-                    .build();
-            Iterator<CSVStateCensus> csvUserIterator = csvToBean.iterator();
+            Iterator<CSVStateCensus> csvUserIterator = this.getCSVFileIterator(reader,CSVStateCensus.class);
             while (csvUserIterator.hasNext()) {
                 count++;
                 CSVStateCensus csvUser = csvUserIterator.next();
             }
-        } catch (NoSuchFileException exception) {
+        } catch (NoSuchFileException exception){
             throw new CensusAnalyserException("File Not Found", CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
-        } catch (RuntimeException exception) {
+        }
+        catch (RuntimeException exception) {
             throw new CensusAnalyserException("File Delimiter Incorrect Or Header Incorrect", CensusAnalyserException.ExceptionType.DELIMETER_PROBLEM);
         }catch (IOException exception){
             exception.printStackTrace();
@@ -38,22 +32,18 @@ public class CensusAnalyser {
         return count;
 
     }
-
     public int loadStateCodeData(String csvFilePath) throws CensusAnalyserException {
         try {
             Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));
-            CsvToBean<CSVStateCode> csvToBean = new CsvToBeanBuilder(reader)
-                    .withType(CSVStateCode.class)
-                    .withIgnoreLeadingWhiteSpace(true)
-                    .build();
-            Iterator<CSVStateCode> csvUserIterator = csvToBean.iterator();
-            while (csvUserIterator.hasNext()) {
+            Iterator<CSVStateCode> csvStateCodeIterator = this.getCSVFileIterator(reader,CSVStateCode.class);
+            while (csvStateCodeIterator.hasNext()) {
                 count++;
-                CSVStateCode csvUser = csvUserIterator.next();
+                CSVStateCode csvUser = csvStateCodeIterator.next();
             }
-        } catch(NoSuchFileException exception){
+        }catch (NoSuchFileException exception){
             throw new CensusAnalyserException("File Not Found", CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
-        }catch (RuntimeException exception){
+        }
+        catch (RuntimeException exception){
             throw new CensusAnalyserException("File Delimiter Incorrect Or Header Incorrect", CensusAnalyserException.ExceptionType.DELIMETER_PROBLEM);
         }
         catch (IOException exception){
@@ -61,6 +51,18 @@ public class CensusAnalyser {
         }
         return count;
     }
+    private<E> Iterator<E>  getCSVFileIterator(Reader reader,
+                                               Class csvClass) throws CensusAnalyserException{
+        try {
+            CsvToBeanBuilder<E> csvToBeanBuilder = new CsvToBeanBuilder<>(reader);
+            csvToBeanBuilder.withType(csvClass);
+            csvToBeanBuilder.withIgnoreLeadingWhiteSpace(true);
+            CsvToBean<E> csvToBean = csvToBeanBuilder.build();
+            return csvToBean.iterator();
+        }catch (IllegalStateException exception)
+        {
+            exception.printStackTrace();
+        }
+        return null;
+    }
 }
-
-
