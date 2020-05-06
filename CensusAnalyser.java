@@ -23,9 +23,11 @@ public class CensusAnalyser {
             throw new CensusAnalyserException("File Not Found", CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
         }
         catch (RuntimeException exception) {
-            throw new CensusAnalyserException("File Delimiter Incorrect Or Header Incorrect", CensusAnalyserException.ExceptionType.DELIMETER_PROBLEM);
+            throw new CensusAnalyserException("File Delimiter Incorrect Or Header Incorrect", CensusAnalyserException.ExceptionType.DELIMITER_PROBLEM);
         } catch (IOException exception){
             exception.printStackTrace();
+        } catch (CSVBuilderException e) {
+            e.printStackTrace();
         }
         return 0;
     }
@@ -41,9 +43,11 @@ public class CensusAnalyser {
             throw new CensusAnalyserException("File Not Found", CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
         }
         catch (RuntimeException exception){
-            throw new CensusAnalyserException("File Delimiter Incorrect Or Header Incorrect", CensusAnalyserException.ExceptionType.DELIMETER_PROBLEM);
+            throw new CensusAnalyserException("File Delimiter Incorrect Or Header Incorrect", CensusAnalyserException.ExceptionType.DELIMITER_PROBLEM);
         } catch (IOException exception){
             exception.printStackTrace();
+        } catch (CSVBuilderException e) {
+            e.printStackTrace();
         }
 
         return 0;
