@@ -1,4 +1,4 @@
-package stateProblem;
+package csvBuilderLibrary;
 
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
@@ -10,7 +10,7 @@ import java.util.List;
 public class OpenCSVBuilder<E> implements ICSVBuilder<E> {
     @Override
     public  Iterator<E> getCSVFileIterator(Reader reader,
-                                              Class csvClass) throws CSVBuilderException{
+                                              Class csvClass) throws CSVBuilderException {
        return this.getCSVBean(reader,csvClass).iterator();
     }
 
@@ -32,3 +32,4 @@ public class OpenCSVBuilder<E> implements ICSVBuilder<E> {
         return null;
     }
 }
+//

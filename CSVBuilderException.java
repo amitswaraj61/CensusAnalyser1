@@ -1,4 +1,4 @@
-package stateProblem;
+package csvBuilderLibrary;
 
 public class CSVBuilderException extends Exception {
     private final String message;
@@ -6,7 +6,7 @@ public class CSVBuilderException extends Exception {
     enum ExceptionType{
         CENSUS_FILE_PROBLEM,DELIMITER_PROBLEM;
     }
-    public CSVBuilderException(String message,ExceptionType type)
+    public CSVBuilderException(String message, ExceptionType type)
     {
         super(message);
         this.type=type;
@@ -14,3 +14,4 @@ public class CSVBuilderException extends Exception {
     }
 
 }
+//

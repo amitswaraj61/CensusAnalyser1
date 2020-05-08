@@ -17,37 +17,39 @@ public class CSVStateCode{
    public CSVStateCode(){
 
    }
-   public  int getSrNo(){
-       return srNo;
+    public  int getSrNo(){
+        return srNo;
     }
 
     public void setSrNo(int srNo){
-       this.srNo=srNo;
+        this.srNo=srNo;
     }
 
     public String getStateName(){
-       return stateName;
+        return stateName;
     }
 
     public void setStateName(String stateName){
-       this.stateName=stateName;
+        this.stateName=stateName;
     }
 
     public int getTin(){
-       return tin;
+        return tin;
     }
 
     public void setTin(int tin){
-       this.tin=tin;
+        this.tin=tin;
     }
 
     public String getStateCode(){
-       return stateCode;
+        return stateCode;
     }
 
     public void setStateCode(String stateCode){
-       this.stateCode=stateCode;
+        this.stateCode=stateCode;
     }
+
+
 
     @Override
     public String toString(){
@@ -59,3 +61,4 @@ public class CSVStateCode{
                 '}' ;
    }
 }
+//

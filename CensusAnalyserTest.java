@@ -1,5 +1,6 @@
 package stateProblem;
 
+import com.google.gson.Gson;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 import com.opencsv.exceptions.CsvValidationException;
 import org.junit.Test;
@@ -115,6 +116,18 @@ public class CensusAnalyserTest {
             censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_DELIMITER_HEADER_WRONG);
         } catch (CensusAnalyserException exception) {
             assertEquals("File Delimiter Incorrect Or Header Incorrect", exception.getMessage());
+        }
+    }
+    @Test
+    public void givenIndianCensusData_WhenSortedOnState_ShouldReturnSortedResult(){
+        try{
+            CensusAnalyser censusAnalyser=new CensusAnalyser();
+            censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_FILE_PATH);
+            String sortedCensusData=censusAnalyser.getStateWiseSortedCensusData();
+            CSVStateCensus[] censusCSV=new Gson().fromJson(sortedCensusData,CSVStateCensus[].class);
+            assertEquals("Andhra Pradesh",censusCSV[0].state);
+        }catch (CensusAnalyserException exception){
+            exception.printStackTrace();
         }
     }
 }
