@@ -1,12 +1,13 @@
 package csvBuilderLibrary;
 
+
 public class CSVBuilderException extends Exception {
-    private final String message;
-    ExceptionType type;
-    enum ExceptionType{
-        CENSUS_FILE_PROBLEM,DELIMITER_PROBLEM;
+    public  String message;
+    public ExceptionType type;
+   public enum ExceptionType{
+        CENSUS_FILE_PROBLEM,DELIMITER_PROBLEM
     }
-    public CSVBuilderException(String message, ExceptionType type)
+    public CSVBuilderException(String message,CSVBuilderException.ExceptionType type)
     {
         super(message);
         this.type=type;
@@ -14,4 +15,3 @@ public class CSVBuilderException extends Exception {
     }
 
 }
-//

@@ -130,4 +130,16 @@ public class CensusAnalyserTest {
             exception.printStackTrace();
         }
     }
+    @Test
+    public void givenIndianStateCodeData_WhenSortedOnState_ShouldReturnSortedResult(){
+        try{
+            CensusAnalyser censusAnalyser=new CensusAnalyser();
+            censusAnalyser.loadStateCodeData(STATE_CODE_CSV_FILE_PATH);
+            String sortedCensusData=censusAnalyser.getStateWiseSortedStateCodeData();
+            CSVStateCode[] censusCSV=new Gson().fromJson(sortedCensusData,CSVStateCode[].class);
+            assertEquals("Andaman and Nicobar Islands",censusCSV[0].stateName);
+        }catch (CensusAnalyserException exception){
+            exception.printStackTrace();
+        }
+    }
 }

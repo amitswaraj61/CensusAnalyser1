@@ -8,25 +8,25 @@ public class CSVStateCode{
     @CsvBindByName(column = "StateName", required = true)
     public String stateName;
 
-    @CsvBindByName(column = "Tin")
+    @CsvBindByName(column = "Tin",required = true)
     public int tin;
 
-   @CsvBindByName(column = "StateCode")
+   @CsvBindByName(column = "StateCode",required = true)
    public String stateCode;
 
    public CSVStateCode(){
 
    }
     public  int getSrNo(){
-        return srNo;
+       return srNo;
     }
 
     public void setSrNo(int srNo){
-        this.srNo=srNo;
+       this.srNo=srNo;
     }
 
     public String getStateName(){
-        return stateName;
+       return stateName;
     }
 
     public void setStateName(String stateName){
@@ -34,11 +34,11 @@ public class CSVStateCode{
     }
 
     public int getTin(){
-        return tin;
+       return tin;
     }
 
     public void setTin(int tin){
-        this.tin=tin;
+       this.tin=tin;
     }
 
     public String getStateCode(){
@@ -46,11 +46,8 @@ public class CSVStateCode{
     }
 
     public void setStateCode(String stateCode){
-        this.stateCode=stateCode;
+       this.stateCode=stateCode;
     }
-
-
-
     @Override
     public String toString(){
         return "IndiaStateCSV{" +
@@ -61,4 +58,3 @@ public class CSVStateCode{
                 '}' ;
    }
 }
-//

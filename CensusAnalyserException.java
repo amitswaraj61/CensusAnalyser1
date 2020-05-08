@@ -1,10 +1,15 @@
 package stateProblem;
 
 class CensusAnalyserException extends Exception {
-    private final String message;
-    ExceptionType type;
-    enum ExceptionType{
+    public  String message;
+   ExceptionType type;
+   public enum ExceptionType{
         CENSUS_FILE_PROBLEM,DELIMITER_PROBLEM,NO_CENSUS_DATA;
+    }
+
+    public CensusAnalyserException(String message,String name){
+        super(message);
+        this.type=ExceptionType.valueOf(name);
     }
     public CensusAnalyserException(String message, ExceptionType type)
     {
@@ -16,4 +21,3 @@ class CensusAnalyserException extends Exception {
 }
 
 
-//
