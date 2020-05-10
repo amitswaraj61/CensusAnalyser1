@@ -157,7 +157,19 @@ public class CensusAnalyserTest {
             censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_FILE_PATH);
             String sortedCensusData=censusAnalyser.getPopulationWiseSortedCensusData();
             CSVStateCensus[] censusCSV = new Gson().fromJson(sortedCensusData, CSVStateCensus[].class);
-            assertEquals(1980602,censusCSV[censusCSV.length-1].population);
+            assertEquals(199812341,censusCSV[censusCSV.length-1].population);
+        } catch (CensusAnalyserException exception) {
+            exception.printStackTrace();
+        }
+    }
+    @Test
+    public void givenIndiaCensusData_WhenSortedOnDensity_shouldReturnMostPopulationDensity(){
+        try{
+            CensusAnalyser censusAnalyser=new CensusAnalyser();
+            censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_FILE_PATH);
+            String sortedCensusData= censusAnalyser.getDensityWiseSortedCensusData();
+            CSVStateCensus[] censusCSV = new Gson().fromJson(sortedCensusData, CSVStateCensus[].class);
+            assertEquals(1102, censusCSV[censusCSV.length-1].densityPerSqKm);
         } catch (CensusAnalyserException exception) {
             exception.printStackTrace();
         }

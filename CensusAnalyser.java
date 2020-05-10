@@ -92,10 +92,10 @@ public class CensusAnalyser {
     private <E> List<E> sort(Comparator<E> comparator, List<E> censusComparator) {
         for(int i=0;i<censusComparator.size()-1;i++){
             for(int j=0;j<censusComparator.size()-i-1;j++){
-                E census1=censusComparator.get(i);
+                E census1=censusComparator.get(j);
                 E census2=censusComparator.get(j+1);
                 if(comparator.compare(census1,census2) > 0){
-                    censusComparator.set(i,census2);
+                    censusComparator.set(j,census2);
                     censusComparator.set(j+1,census1);
                 }
             }
@@ -108,6 +108,16 @@ public class CensusAnalyser {
             throw new CensusAnalyserException("No Census Data",CensusAnalyserException.ExceptionType.NO_CENSUS_DATA);
         }
         Comparator<CSVStateCensusDao> censusComparator=Comparator.comparing(census -> census.population);
+        List<CSVStateCensusDao> sortedStateCode=this.sort(censusComparator,new ArrayList<>(csvStateCensusMap.values()));
+        String sortedStateCodeJson=new Gson().toJson(sortedStateCode);
+        return sortedStateCodeJson;
+    }
+
+    public String getDensityWiseSortedCensusData() throws CensusAnalyserException{
+        if(csvStateCensusMap== null || csvStateCensusMap.size() == 0) {
+            throw new CensusAnalyserException("No Census Data",CensusAnalyserException.ExceptionType.NO_CENSUS_DATA);
+        }
+        Comparator<CSVStateCensusDao> censusComparator=Comparator.comparing(census -> census.densityPerSqKm);
         List<CSVStateCensusDao> sortedStateCode=this.sort(censusComparator,new ArrayList<>(csvStateCensusMap.values()));
         String sortedStateCodeJson=new Gson().toJson(sortedStateCode);
         return sortedStateCodeJson;
