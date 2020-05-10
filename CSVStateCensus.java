@@ -10,7 +10,7 @@ public class CSVStateCensus {
     public int population;
 
     @CsvBindByName(column = "AreaInSqKm")
-    public int areaInSqkm;
+    public int areaInSqKm;
 
     @CsvBindByName(column = "DensityPerSqKm")
     public int densityPerSqKm;
@@ -23,9 +23,9 @@ public class CSVStateCensus {
         return "IndiaCensusCSV{" +
                 "State='" + state + '\'' +
                 ", Population='" + population + '\'' +
-                ", AreaInSqKm='" + areaInSqkm + '\'' +
+                ", AreaInSqKm='" + areaInSqKm + '\'' +
                 ", DensityPerSqKm='" + densityPerSqKm + '\'' +
                 '}';
     }
 }
-
+//

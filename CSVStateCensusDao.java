@@ -10,8 +10,9 @@ public class CSVStateCensusDao {
 
     public CSVStateCensusDao(CSVStateCensus censusCSV) {
         state = censusCSV.state;
-        areaInSqKm=censusCSV.areaInSqkm;
+        areaInSqKm=censusCSV.areaInSqKm;
         densityPerSqKm=censusCSV.densityPerSqKm;
         population=censusCSV.population;
     }
 }
+//
