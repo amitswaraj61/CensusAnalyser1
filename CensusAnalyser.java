@@ -102,6 +102,16 @@ public class CensusAnalyser {
         }
         return censusComparator;
     }
+
+    public String getPopulationWiseSortedCensusData() throws CensusAnalyserException {
+        if(csvStateCensusMap== null || csvStateCensusMap.size() == 0) {
+            throw new CensusAnalyserException("No Census Data",CensusAnalyserException.ExceptionType.NO_CENSUS_DATA);
+        }
+        Comparator<CSVStateCensusDao> censusComparator=Comparator.comparing(census -> census.population);
+        List<CSVStateCensusDao> sortedStateCode=this.sort(censusComparator,new ArrayList<>(csvStateCensusMap.values()));
+        String sortedStateCodeJson=new Gson().toJson(sortedStateCode);
+        return sortedStateCodeJson;
+    }
 }
 
 

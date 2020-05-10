@@ -25,7 +25,8 @@ public class CSVStateCode{
        this.srNo=srNo;
     }
 
-    public String getStateName(){
+    public String getStateName()
+    {
        return stateName;
     }
 
@@ -58,3 +59,4 @@ public class CSVStateCode{
                 '}' ;
    }
 }
+//
