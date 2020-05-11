@@ -27,8 +27,9 @@ public class CensusAnalyser {
         return this.loadCensusData(csvFilePath, CSVStateCensus.class);
     }
 
-    public int loadStateCodeData(String csvFilePath1) throws CensusAnalyserException {
-        return this.loadCensusData(csvFilePath1, CSVStateCode.class);
+    public int loadStateCodeData(String csvCensusFile,String csvStateFile) throws CensusAnalyserException {
+        this.loadIndiaCensusData(csvCensusFile);
+        return this.loadCensusData(csvStateFile, CSVStateCode.class);
     }
 
     private <E> int loadCensusData(String csvFilePath, Class<E> censusCSVClass) throws CensusAnalyserException {
@@ -41,14 +42,14 @@ public class CensusAnalyser {
                 StreamSupport.stream(csvStateCensusIterable.spliterator(), false)
                         .map(CSVStateCensus.class::cast)
                         .forEach(censusCSV -> csvStateCensusMap.put(censusCSV.state, new CSVStateCensusDao(censusCSV)));
-                return csvStateCensusMap.size();
+                        return csvStateCensusMap.size();
             }
             if (censusCSVClass.getName().equals("stateProblem.CSVStateCode")) {
                 StreamSupport.stream(csvStateCensusIterable.spliterator(), false)
                         .map(CSVStateCode.class::cast)
                         .filter(stateCSV -> csvStateCensusMap.get(stateCSV.stateName) != null)
                         .forEach(stateCSV -> csvStateCensusMap.get(stateCSV.stateName).stateCode = stateCSV.stateCode);
-                return csvStateCensusMap.size();
+                        return csvStateCensusMap.size();
             }
         } catch (NoSuchFileException exception) {
             throw new CensusAnalyserException("File Not Found", CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
